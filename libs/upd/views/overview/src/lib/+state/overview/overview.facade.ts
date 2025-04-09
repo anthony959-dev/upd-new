@@ -703,6 +703,11 @@ export class OverviewFacade {
         const data_reliability = evaluateDataReliability(d.margin_of_error);
         const baseData = { ...d, data_reliability };
 
+        const able_to_complete_difference = d.able_to_complete - d.able_to_complete_difference;
+        const ease_difference = d.ease - d.ease_difference;
+        const satisfaction_difference = d.satisfaction - d.satisfaction_difference;
+        
+
         return data_reliability === 'Insufficient data'
           ? {
               ...baseData,
@@ -846,6 +851,11 @@ export class OverviewFacade {
       translate: true,
       pipe: 'percent',
       pipeParam: '1.0-1',
+      secondaryField: {
+        field: 'able_to_complete_difference',
+        pipe: 'percent',
+        pipeParam: '1.0-1',
+      },
     },
     {
       field: 'ease',
@@ -853,6 +863,11 @@ export class OverviewFacade {
       translate: true,
       pipe: 'percent',
       pipeParam: '1.0-1',
+      secondaryField: {
+        field: 'ease_difference',
+        pipe: 'percent',
+        pipeParam: '1.0-1',
+      },
     },
     {
       field: 'satisfaction',
@@ -860,6 +875,11 @@ export class OverviewFacade {
       translate: true,
       pipe: 'percent',
       pipeParam: '1.0-1',
+      secondaryField: {
+        field: 'satisfaction_difference',
+        pipe: 'percent',
+        pipeParam: '1.0-1',
+      },
     },
     {
       field: 'margin_of_error',

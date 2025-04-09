@@ -187,6 +187,9 @@ export interface gcTasksData {
     | 'Low margin of error/Reliable data'
     | 'Higher margin of error/Use data with caution'
     | 'Insufficient data';
+  satisfaction_difference: number;
+  ease_difference: number;
+  able_to_complete_difference: number;
 }
 
 export interface gcTasksComments {
