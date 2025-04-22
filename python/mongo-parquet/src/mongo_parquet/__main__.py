@@ -31,9 +31,9 @@ class MongoParquet:
         self.remote_container = remote_container
         self.data_dir = data_dir
         # todo: later for s3: pass in some sort of cloud config that allows for multi-cloud
-        self.azure_storage_account_name = os.getenv("AZURE_STORAGE_ACCOUNT_NAME", "")
-        self.azure_storage_account_key = os.getenv("AZURE_STORAGE_ACCOUNT_KEY", "")
-        self.azure_connection_string = os.getenv("AZURE_STORAGE_CONNECTION_STRING", "")
+        self.azure_storage_account_name = os.getenv("AZURE_DATA_ACCOUNT_NAME", "")
+        self.azure_storage_account_key = os.getenv("AZURE_DATA_ACCOUNT_KEY", "")
+        self.azure_connection_string = os.getenv("AZURE_DATA_CONNECTION_STRING", "")
         self.fs = AzureBlobFileSystem(connection_string=self.azure_connection_string)
         self.pl_storage_options = {
             "azure_storage_account_name": self.azure_storage_account_name,
@@ -226,10 +226,12 @@ class MongoParquet:
 
         def read_parquet(filepath: str) -> pl.DataFrame:
             print(f"📥 Reading {filepath}...")
-            return pl.read_parquet(
-                f"az://{filepath}" if use_remote_storage else filepath,
-                storage_options=self.pl_storage_options if use_remote_storage else None,
-            )
+            
+            if use_remote_storage:
+              with self.fs.open(f"{filepath}", "rb") as f:
+                  return pl.read_parquet(f.read())
+
+            return pl.read_parquet(filepath)
 
         # --- Config for merged collections ---
         IMPORT_CONFIG = {
