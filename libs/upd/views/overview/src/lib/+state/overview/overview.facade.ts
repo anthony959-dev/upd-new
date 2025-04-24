@@ -851,6 +851,10 @@ export class OverviewFacade {
       translate: true,
       pipe: 'percent',
       pipeParam: '1.0-1',
+      upGoodDownBad: false,
+      indicator: true,
+      useArrows: true,
+      showTextColours: true,
       secondaryField: {
         field: 'able_to_complete_difference',
         pipe: 'percent',
@@ -863,6 +867,10 @@ export class OverviewFacade {
       translate: true,
       pipe: 'percent',
       pipeParam: '1.0-1',
+      upGoodDownBad: false,
+      indicator: true,
+      useArrows: true,
+      showTextColours: true,
       secondaryField: {
         field: 'ease_difference',
         pipe: 'percent',
@@ -875,6 +883,10 @@ export class OverviewFacade {
       translate: true,
       pipe: 'percent',
       pipeParam: '1.0-1',
+      upGoodDownBad: false,
+      indicator: true,
+      useArrows: true,
+      showTextColours: true,
       secondaryField: {
         field: 'satisfaction_difference',
         pipe: 'percent',
