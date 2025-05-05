@@ -707,7 +707,7 @@ export class OverviewFacade {
   );
 
   gcTasksTable$ = this.overviewData$.pipe(
-    map((data) =>
+    map((data) => {
       data?.dateRangeData?.gcTasksData.map((d) => {
         const data_reliability = evaluateDataReliability(d.margin_of_error);
         const baseData = { ...d, data_reliability };
@@ -726,7 +726,9 @@ export class OverviewFacade {
               margin_of_error: NaN,
             }
           : baseData;
-      }),
+      })
+    }
+      
     ),
   );
 
